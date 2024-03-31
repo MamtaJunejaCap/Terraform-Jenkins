@@ -20,10 +20,14 @@ pipeline {
                     }
                 }
             }
+        stage ("terraform init") {
+            steps {
+                bat ('terraform init') 
+            }
+        }
 
         stage('Plan') {
-             steps {
-                bat ('terraform init')
+             steps {                
                 bat ('terraform plan -out tfplan')
                 bat ('terraform show -no-color tfplan > tfplan.txt')
             }
